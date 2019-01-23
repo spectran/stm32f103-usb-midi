@@ -166,7 +166,8 @@ void USBD_MIDI_SendPacket (){
       APP_Rx_length = 0;
     }
     USB_Tx_State = 1;
-    USBD_LL_Transmit (pInstance, MIDI_IN_EP,(uint8_t*)&APP_Rx_Buffer[USB_Tx_ptr],USB_Tx_length);
+    while(USBD_LL_Transmit(pInstance,
+    		MIDI_IN_EP,(uint8_t*)&APP_Rx_Buffer[USB_Tx_ptr],USB_Tx_length) != USBD_OK);
   }
 }
 
